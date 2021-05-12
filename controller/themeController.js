@@ -1,8 +1,5 @@
 const Theme= require('../model/Theme')
 const mongoose = require('mongoose')
-// const requestIp = require('request-ip')
-// var ip = require('ip');
-// const publicIp = require('public-ip');
 const internalIp = require('internal-ip');
 module.exports = {
     addTheme : function (req,res){

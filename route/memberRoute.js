@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const checkAuth = require('../middleware/check-auth');
 const path = require('path');
-//const Region = require('../model/region');
+const Region = require('../model/region');
 const generate = require('../middleware/passwordGenerator');
 const config = require('../config/env/development');
 //const sendEmail2 = require('../modules/mailgun');
@@ -579,6 +579,35 @@ router.delete("/members/:id", checkAuth, (req, res, next) => {
 
     });
 });
+
+router.get("/members/region/:idRegion", (req, res) => {
+    Region.findOne({ _id: req.params.idRegion }, (err, document) => {
+      if (err) res.status(500).send(err);
+      else if (!document)
+        res.status(404).send(`region with id ${req.params.idRegion} not found`);
+      else {
+        Member.find({ _regionId: req.params.idRegion, state: "Accepted" })
+          .sort({ inscriptionDate: -1 })
+          .then((result) => {
+              console.log(result);
+            if (!result) {
+              res
+                .status(404)
+                .send(`no member for region with id ${document._id}`);
+            } else if (result) {
+              res.status(200).json({
+                message: `members  with id regions  ${result._id} sont trouvés `,
+                members: result,
+              });
+            }
+          })
+          .catch((err) => {
+            res.status(500).send(err);
+          });
+      }
+    });
+  });
+
 
 
 router.get("/members/tokens/:token", (req, res) => {

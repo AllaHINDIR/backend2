@@ -9,8 +9,10 @@ const commentRoute = require('./route/commentRoutes');
 const themeRoute = require('./route/themeRoute')
 const topicRoute = require('./route/topicRoutes')
 const memberRoute = require('./route/memberRoute')
+const regionRoute = require('./route/regionRoute')
 
 const path = require('path');
+const { constants } = require('buffer');
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.Host;
 const app = express();
@@ -86,6 +88,7 @@ app.use(commentRoute);
 app.use(themeRoute);
 app.use(topicRoute);
 app.use(memberRoute);
+app.use(regionRoute);
 
 
 app.listen(PORT, () => {

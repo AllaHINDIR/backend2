@@ -11,7 +11,7 @@ const memberSchema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     phone: { type: String, required: false },
     adresse: { type: String, required: false },
-    //_regionId : {type : mongoose.Schema.Types.ObjectId, required : false, ref :"Region"},
+    _regionId : {type : mongoose.Schema.Types.ObjectId, required : true, ref :"Region"},
     inscriptionDate: { type: Date, required: true, default: new Date() },
     imagePath: { type: String, required: false },
     certifPath: { type: String, required: false },

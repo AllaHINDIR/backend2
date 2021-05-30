@@ -217,7 +217,7 @@ router.post("/login", (req, res, next) => {
         .then(result => {
             if (!result) {
                 return res.status(401).json({
-                    message: "Auth failed"
+                    message: "Mot de passe incorrect"
                 });
             }
             if (fetchedMember != undefined){
@@ -236,12 +236,12 @@ router.post("/login", (req, res, next) => {
             });
         }
         })
-        // .catch(err => {
-        //     return res.status(401).json({
-        //         message: "Erreur de connexion",
-        //         error: err
-        //     });
-        // });
+        .catch(err => {
+            return res.status(401).json({
+                message: "Erreur de connexion",
+                error: err
+            });
+        });
 });
 
 

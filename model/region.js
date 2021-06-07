@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
 const regionSchema = mongoose.Schema({
-
-    nom: {type : String , required:true}
+    _id : mongoose.Schema.Types.ObjectId,
+    nom: {type : String , required:true},
+    latitude: {type : Number , required:true}, 
+    longitude: {type : Number , required:true} ,
 
 });
 

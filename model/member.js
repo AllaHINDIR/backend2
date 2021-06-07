@@ -26,7 +26,10 @@ const memberSchema = mongoose.Schema({
         enum: ["user", "admin", "root"]
     }
 });
-
+memberSchema.pre(['find','findOne'],function(next) {
+    this.populate('_regionId');
+    next();
+})
 memberSchema.plugin(uniqueValidator);
 const member = mongoose.model('Member', memberSchema);
 
